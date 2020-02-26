@@ -29,7 +29,7 @@ if (typeof window !== 'undefined') {
 apolloClient
   .query({
     query: gql`
-      query OrderListQuery {
+      query OrderListQueryDEMO {
         viewer {
           orderPagination {
             count

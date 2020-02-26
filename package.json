@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint 'src/**/*.{js,ts,tsx}'",
-    "apollo-codegen": "apollo client:codegen src/__generated__ --outputFlat --addTypename --target=typescript --localSchemaFile=\"../schema.graphql\" --includes=\"./src/**/*.{ts,tsx}\" --tagName gql",
+    "apollo-codegen": "apollo client:codegen --addTypename --target=typescript --localSchemaFile=\"./schema.graphql\" --includes=\"./src/**/*.{ts,tsx}\" --tagName gql",
     "watch-codegen": "npm run apollo-codegen -- --watch",
     "new-generate": "graphql-codegen",
     "new-watch-generate": "graphql-codegen --watch",
