@@ -1,0 +1,26 @@
+query OrderListQuery($perPage: Int, $page: Int) {
+  viewer {
+    orderPagination(perPage: $perPage, page: $page) {
+      count
+      items {
+        orderID
+        orderDate
+        freight
+        employee {
+          firstName
+          lastName
+        }
+        customer {
+          companyName
+          address {
+            city
+          }
+        }
+      }
+      pageInfo {
+        perPage
+        currentPage
+      }
+    }
+  }
+}

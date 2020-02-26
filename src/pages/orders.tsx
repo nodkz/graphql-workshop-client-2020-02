@@ -1,11 +1,11 @@
 import { withApollo } from 'app/utils/withApollo';
-import OrderPagination from 'app/components/OrderPagination';
+import OrderPagination2 from 'app/components/OrderPagination2';
 
 function orders() {
   return (
     <div>
       <h1>Order list</h1>
-      <OrderPagination />
+      <OrderPagination2 />
     </div>
   );
 }

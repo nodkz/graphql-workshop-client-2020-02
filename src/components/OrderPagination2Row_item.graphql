@@ -1,0 +1,15 @@
+fragment OrderPagination2Row_item on Order {
+  orderID
+  # orderDate
+  freight
+  # employee {
+  #   firstName
+  #   lastName
+  # }
+  customer {
+    companyName
+    #   address {
+    #     city
+    #   }
+  }
+}

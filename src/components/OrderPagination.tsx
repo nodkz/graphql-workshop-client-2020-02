@@ -1,40 +1,8 @@
-import { gql, useQuery } from '@apollo/client';
-import { notification, Table } from 'antd';
-import {
-  OrderListQuery,
-  OrderListQuery_viewer_orderPagination_items,
-} from './__generated__/OrderListQuery';
+import { Table, Button } from 'antd';
 import { PaginationConfig } from 'antd/lib/table';
 import { useRouter } from 'next/router';
-
-const query = gql`
-  query OrderListQuery($perPage: Int, $page: Int) {
-    viewer {
-      orderPagination(perPage: $perPage, page: $page) {
-        count
-        items {
-          orderID
-          orderDate
-          freight
-          employee {
-            firstName
-            lastName
-          }
-          customer {
-            companyName
-            address {
-              city
-            }
-          }
-        }
-        pageInfo {
-          perPage
-          currentPage
-        }
-      }
-    }
-  }
-`;
+import { useOrderListQuery } from './__generated__/OrderListQuery';
+import { useOrderDeleteMutation } from './__generated__/OrderDeleteMutation';
 
 export default function OrderPagination() {
   const router = useRouter();
@@ -44,19 +12,8 @@ export default function OrderPagination() {
     perPage: parseInt((router.query as any)?.perPage) || 10,
   };
 
-  const { data, loading } = useQuery<OrderListQuery>(query, {
-    variables,
-    // onCompleted: () => {
-    //   notification.info({
-    //     message: 'Запрос выполнен!!!',
-    //   });
-    // },
-    onError: (e) => {
-      notification.error({
-        message: JSON.stringify(e),
-      });
-    },
-  });
+  const { data, loading, refetch } = useOrderListQuery({ variables });
+  const [orderDelete] = useOrderDeleteMutation();
 
   function onChange(pagination: PaginationConfig) {
     router.push({
@@ -69,7 +26,7 @@ export default function OrderPagination() {
   }
 
   return (
-    <Table<OrderListQuery_viewer_orderPagination_items>
+    <Table
       loading={loading}
       dataSource={data?.viewer?.orderPagination?.items || []}
       pagination={{
@@ -103,6 +60,27 @@ export default function OrderPagination() {
           title: 'Freight',
           dataIndex: 'freight',
           width: '150px',
+        },
+        {
+          title: 'Operations',
+          render: (t, record) => {
+            return (
+              <Button
+                onClick={async () => {
+                  await orderDelete({
+                    variables: {
+                      filter: {
+                        orderID: record.orderID,
+                      },
+                    },
+                  });
+                  refetch();
+                }}
+              >
+                Delete
+              </Button>
+            );
+          },
         },
       ]}
     />

@@ -1,0 +1,15 @@
+query OrderPagination2Query($perPage: Int, $page: Int) {
+  viewer {
+    orderPagination(perPage: $perPage, page: $page) {
+      count
+      items {
+        freight
+        ...OrderPagination2Row_item
+      }
+      pageInfo {
+        perPage
+        currentPage
+      }
+    }
+  }
+}

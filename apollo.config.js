@@ -4,7 +4,7 @@ module.exports = {
       name: 'client',
       localSchemaFile: './schema.graphql',
     },
-    tagName: 'gql',
-    // tagName: 'omitGqlTagsTheyAreUnderGraphqlCodeGeneratorControl',
+    // tagName: 'gql',
+    tagName: 'omitGqlTagsTheyAreUnderGraphqlCodeGeneratorControl',
   },
 };
