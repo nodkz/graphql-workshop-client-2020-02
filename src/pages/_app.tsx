@@ -50,6 +50,11 @@ export default function App({ Component, pageProps }) {
           <Menu.Item key="/reset">
             <a onClick={resetCache}>Reset cache</a>
           </Menu.Item>
+          <Menu.Item key="/ac">
+            <Link href="/orders">
+              <a>Raw apolloClient</a>
+            </Link>
+          </Menu.Item>
           <Menu.Item key="/api">
             <a
               href="https://graphql-compose.herokuapp.com/northwind-altair/"
